@@ -1,0 +1,62 @@
+:root {
+  --ink: #4a392e;
+  --muted: #7f6c5e;
+  --paper: #fffdf8;
+  --line: #e3d3bf;
+  --latte: #a7754d;
+  --shadow: 0 18px 48px rgba(89, 61, 40, .12);
+}
+
+* { box-sizing: border-box; }
+html { min-height: 100%; background: #f6efe5; }
+body { min-height: 100%; margin: 0; overflow-x: hidden; color: var(--ink); background: radial-gradient(circle at 8% 12%, rgba(238,195,129,.24), transparent 25rem), radial-gradient(circle at 92% 76%, rgba(188,147,185,.16), transparent 27rem), #f6efe5; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; }
+a { color: inherit; }
+
+.site-header { display: flex; align-items: center; justify-content: space-between; width: min(1120px, calc(100% - 40px)); min-height: 82px; margin: auto; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.brand span { display: grid; }.brand strong { font-family: Georgia, "Noto Serif TC", serif; }.brand small { margin-top: 2px; color: var(--muted); font-size: .66rem; letter-spacing: .08em; }
+.home-link { padding: 8px 15px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.5); text-decoration: none; font-size: .8rem; font-weight: 800; transition: .2s ease; }
+.home-link:hover, .home-link:focus-visible { border-color: var(--latte); background: white; }
+
+main { width: min(1120px, calc(100% - 40px)); margin: auto; }
+.hero { position: relative; padding: clamp(72px, 10vw, 120px) 0 55px; text-align: center; }
+.eyebrow { margin: 0 0 12px; color: var(--latte); font-size: .72rem; font-weight: 900; letter-spacing: .22em; }
+h1 { margin: 0; font-family: Georgia, "Noto Serif TC", serif; font-size: clamp(2.7rem, 7vw, 5.5rem); line-height: 1; letter-spacing: .06em; }
+.hero > p:last-of-type { margin: 20px 0 0; color: var(--muted); font-size: clamp(.95rem, 2vw, 1.12rem); }
+.hero-decoration { position: absolute; inset: 34px 3% auto; display: flex; justify-content: space-between; color: #d5aa6b; font-size: 1.6rem; pointer-events: none; }
+.hero-decoration span:nth-child(2) { align-self: end; color: #c09bb5; font-size: .75rem; }
+
+.game-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+.game-card { position: relative; display: flex; min-width: 0; min-height: 510px; overflow: hidden; padding: 28px; border: 1px solid var(--line); border-radius: 30px; background: var(--paper); box-shadow: var(--shadow); text-decoration: none; flex-direction: column; transition: transform .22s ease, box-shadow .22s ease; }
+.game-card:hover { transform: translateY(-7px) rotate(-.25deg); box-shadow: 0 25px 58px rgba(89,61,40,.18); }
+.game-card:focus-visible { outline: 4px solid var(--latte); outline-offset: 5px; }
+.game-two:hover { transform: translateY(-7px) rotate(.25deg); }
+.game-number { position: relative; z-index: 2; align-self: flex-start; padding: 6px 10px; border-radius: 999px; color: white; background: var(--ink); font-size: .68rem; font-weight: 900; letter-spacing: .11em; }
+.game-art { position: relative; display: grid; min-height: 210px; margin: 18px 0 25px; overflow: hidden; border-radius: 23px; place-items: center; }
+.game-one .game-art { background: linear-gradient(145deg, #e9d4bb, #f9ead2); }
+.game-two .game-art { background: linear-gradient(145deg, #9edee5, #f6cc67); }
+.studio-door { display: grid; width: 125px; height: 160px; border: 7px solid #6b4e3a; border-radius: 60px 60px 12px 12px; color: #6b4e3a; background: #fff9ea; box-shadow: 14px 12px 0 rgba(107,78,58,.16); place-items: center; font-size: .72rem; font-weight: 1000; letter-spacing: .12em; }
+.character-icon { position: absolute; right: 16%; bottom: 9%; font-size: 4.2rem; filter: drop-shadow(4px 5px 0 rgba(74,57,46,.16)); transition: transform .25s ease; }
+.game-one:hover .character-icon { transform: rotate(15deg) translateY(-8px); }
+.chase-icon, .demon-icon, .impact-icon { position: absolute; filter: drop-shadow(4px 6px 0 rgba(74,57,46,.14)); }
+.chase-icon { left: 11%; bottom: 19%; font-size: 4.7rem; }.demon-icon { right: 10%; top: 20%; font-size: 4.8rem; }.impact-icon { z-index: 2; font-size: 3.8rem; transition: transform .2s ease; }
+.game-two:hover .chase-icon { animation: chase .38s ease-in-out infinite alternate; }.game-two:hover .demon-icon { animation: flee .3s ease-in-out infinite alternate; }.game-two:hover .impact-icon { transform: scale(1.25) rotate(12deg); }
+.game-copy { display: grid; gap: 12px; }.game-copy strong { font-family: Georgia, "Noto Serif TC", serif; font-size: clamp(1.7rem, 4vw, 2.45rem); line-height: 1.18; }.game-copy > span { color: var(--muted); line-height: 1.7; }
+.play-button { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 24px; color: var(--latte); font-size: .86rem; font-weight: 900; }.play-button b { display: grid; width: 38px; height: 38px; border-radius: 50%; color: white; background: var(--latte); place-items: center; font-size: 1.05rem; transition: transform .2s ease; }.game-card:hover .play-button b { transform: translateX(4px); }
+.room-note { margin: 48px 0 80px; color: var(--muted); text-align: center; font-family: Georgia, "Noto Serif TC", serif; }
+footer { padding: 28px 20px; border-top: 1px solid var(--line); color: var(--muted); text-align: center; font-size: .72rem; }
+
+@keyframes chase { to { transform: translate(10px, -8px) rotate(-5deg); } }
+@keyframes flee { to { transform: translate(8px, -10px) rotate(8deg); } }
+
+@media (max-width: 720px) {
+  .site-header, main { width: min(100% - 28px, 620px); }
+  .site-header { min-height: 70px; }.brand img { width: 42px; height: 42px; }.brand small { display: none; }.home-link { padding: 7px 12px; }
+  .hero { padding: 65px 0 42px; }.game-grid { grid-template-columns: 1fr; gap: 20px; }.game-card { min-height: 480px; padding: 20px; border-radius: 24px; }.game-art { min-height: 205px; }
+  .room-note { margin: 38px 0 60px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}

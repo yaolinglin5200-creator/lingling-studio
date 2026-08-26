@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f4c86b">
+  <title>GAME-002｜若衡追大魔王</title>
+  <meta name="description" content="點擊或觸控，幫若衡揮棒追擊逃跑的大魔王！">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game-shell" id="gameShell">
+    <header class="game-header">
+      <div>
+        <p class="eyebrow">LINGLING CREATIVE STUDIO · PROTOTYPE</p>
+        <h1>若衡追大魔王</h1>
+      </div>
+      <div class="header-actions">
+        <a class="room-link" href="../index.html">遊戲室</a>
+        <button class="sound-button" id="soundButton" type="button" aria-pressed="true" aria-label="關閉音效">音效 ON</button>
+      </div>
+    </header>
+
+    <section class="hud" aria-label="遊戲狀態">
+      <div class="combo-box"><span>COMBO</span><strong id="combo">0</strong></div>
+      <div class="progress-wrap">
+        <div class="progress-label"><span id="rankLabel">暖身中</span><span><b id="remaining">100</b> HIT TO CLEAR</span></div>
+        <div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+      </div>
+    </section>
+
+    <button class="stage" id="stage" type="button" aria-label="攻擊大魔王，點擊或按空白鍵">
+      <span class="sun" aria-hidden="true"></span>
+      <span class="speed-lines" aria-hidden="true"></span>
+      <span class="road" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="speech speech-ruoheng" id="ruohengSpeech">站住！</span>
+      <span class="speech speech-demon" id="demonSpeech">才不要！</span>
+
+      <span class="runner ruoheng" id="ruoheng">
+        <span class="runner-frame"><span class="sprite" role="img" aria-label="追趕中的若衡"></span></span>
+        <span class="runner-name">若衡</span>
+      </span>
+
+      <span class="runner demon" id="demon">
+        <span class="runner-frame"><span class="sprite" role="img" aria-label="逃跑中的大魔王"></span></span>
+        <span class="runner-name">大魔王</span>
+      </span>
+
+      <span class="hit-burst" id="hitBurst" aria-hidden="true">啪！</span>
+      <span class="floating-layer" id="floatingLayer" aria-hidden="true"></span>
+      <span class="tap-hint" id="tapHint">點擊畫面，揮棒追擊！<small>桌機也可按 SPACE</small></span>
+    </button>
+
+    <p class="status-message" id="statusMessage" aria-live="polite">追上那個假裝很忙的大魔王！</p>
+  </main>
+
+  <section class="clear-screen" id="clearScreen" hidden aria-labelledby="clearTitle">
+    <div class="clear-card">
+      <p class="clear-kicker">100 COMBO</p>
+      <div class="clear-emoji" aria-hidden="true">🤪</div>
+      <h2 id="clearTitle">爆笑追擊成功！</h2>
+      <p>大魔王被追到懷疑魔生，若衡的棒子正式成為工作室年度最佳員工。</p>
+      <strong>GAME CLEAR</strong>
+      <button id="restartButton" type="button">再玩一次</button>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
