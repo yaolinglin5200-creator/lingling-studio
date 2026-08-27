@@ -55,7 +55,8 @@ h1 { margin: 0; font-size: clamp(1.75rem, 5vw, 3.25rem); line-height: 1; letter-
 .demon .runner-name { right: auto; left: 8%; background: #2c2431; color: white; transform: rotate(4deg); }
 .stage.attacking .ruoheng { animation: attack .19s cubic-bezier(.2,.9,.3,1); }
 .stage.attacking .demon { animation: bonk .22s ease-out; }
-.stage.attacking .ruoheng .sprite, .stage.attacking .demon .sprite { animation: sprite-hit .22s steps(1, end); }
+.stage.attacking .ruoheng .sprite { background-size: 384% 384%; animation: sprite-hit .22s steps(1, end); }
+.stage.attacking .demon .sprite { animation: sprite-hit .22s steps(1, end); }
 .stage.impact { filter: saturate(1.35) contrast(1.05); }
 
 .speech { position: absolute; z-index: 5; padding: 8px 13px; border: 3px solid var(--ink); border-radius: 16px; background: white; font-weight: 1000; opacity: 0; transform: scale(.6) rotate(-6deg); transition: .15s; pointer-events: none; }
