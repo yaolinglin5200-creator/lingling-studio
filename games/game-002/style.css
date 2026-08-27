@@ -55,7 +55,7 @@ h1 { margin: 0; font-size: clamp(1.75rem, 5vw, 3.25rem); line-height: 1; letter-
 .demon .runner-name { right: auto; left: 8%; background: #2c2431; color: white; transform: rotate(4deg); }
 .stage.attacking .ruoheng { animation: attack .19s cubic-bezier(.2,.9,.3,1); }
 .stage.attacking .demon { animation: bonk .22s ease-out; }
-.stage.attacking .ruoheng .sprite { background-size: 384% 384%; animation: sprite-hit .22s steps(1, end); }
+.stage.attacking .ruoheng .sprite { background-image: url("assets/ruoheng-attack-spritesheet.png"); background-size: 400% 100%; animation: sprite-attack .22s steps(1, end); }
 .stage.attacking .demon .sprite { animation: sprite-hit .22s steps(1, end); }
 .stage.impact { filter: saturate(1.35) contrast(1.05); }
 
@@ -90,6 +90,7 @@ h1 { margin: 0; font-size: clamp(1.75rem, 5vw, 3.25rem); line-height: 1; letter-
 @keyframes run-a { to { transform: translateY(-10px) rotate(-2deg); } }
 @keyframes run-b { to { transform: translateY(-13px) rotate(3deg); } }
 @keyframes sprite-run { 0% { background-position: 0 33.333%; } 25% { background-position: 33.333% 33.333%; } 50% { background-position: 66.667% 33.333%; } 75%, 100% { background-position: 100% 33.333%; } }
+@keyframes sprite-attack { 0% { background-position: 0 0; } 25% { background-position: 33.333% 0; } 50% { background-position: 66.667% 0; } 75%, 100% { background-position: 100% 0; } }
 @keyframes sprite-hit { 0% { background-position: 0 66.667%; } 25% { background-position: 33.333% 66.667%; } 50% { background-position: 66.667% 66.667%; } 75%, 100% { background-position: 100% 66.667%; } }
 @keyframes road-dash { from { translate: 350px 0; } to { translate: -350px 0; } }
 @keyframes lines { to { translate: -80px 0; } }
