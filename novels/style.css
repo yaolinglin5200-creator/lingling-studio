@@ -1,0 +1,64 @@
+:root {
+  --ink: #4a392e;
+  --muted: #7f6c5e;
+  --paper: #fffdf8;
+  --line: #e3d3bf;
+  --latte: #9a6f4d;
+  --shadow: 0 18px 48px rgba(89, 61, 40, .12);
+}
+
+* { box-sizing: border-box; }
+html { min-height: 100%; background: #f6efe5; }
+body { min-height: 100%; margin: 0; overflow-x: hidden; color: var(--ink); background: radial-gradient(circle at 10% 10%, rgba(223,184,170,.24), transparent 26rem), radial-gradient(circle at 90% 75%, rgba(169,180,156,.2), transparent 28rem), #f6efe5; font-family: system-ui, -apple-system, "Noto Sans TC", sans-serif; }
+a { color: inherit; }
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 10; padding: 10px 16px; border-radius: 8px; color: white; background: var(--ink); }
+.skip-link:focus { top: 12px; }
+
+.site-header { display: flex; align-items: center; justify-content: space-between; width: min(1120px, calc(100% - 40px)); min-height: 82px; margin: auto; border-bottom: 1px solid var(--line); }
+.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.brand img { width: 48px; height: 48px; object-fit: contain; }
+.brand span { display: grid; }
+.brand strong { font-family: Georgia, "Noto Serif TC", serif; }
+.brand small { margin-top: 2px; color: var(--muted); font-size: .66rem; letter-spacing: .08em; }
+.home-link { padding: 8px 15px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.55); text-decoration: none; font-size: .8rem; font-weight: 800; }
+.home-link:hover, .home-link:focus-visible { border-color: var(--latte); background: white; }
+
+main { width: min(1120px, calc(100% - 40px)); margin: auto; }
+.hero { padding: clamp(68px, 9vw, 110px) 0 50px; text-align: center; }
+.eyebrow { margin: 0 0 12px; color: var(--latte); font-size: .72rem; font-weight: 900; letter-spacing: .22em; }
+h1 { margin: 0; font-family: Georgia, "Noto Serif TC", serif; font-size: clamp(2.8rem, 7vw, 5.5rem); line-height: 1.1; letter-spacing: .06em; }
+.hero > p:last-child { margin: 20px 0 0; color: var(--muted); line-height: 1.8; }
+
+.novel-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
+.novel-card { min-width: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 28px; background: var(--paper); box-shadow: var(--shadow); text-decoration: none; transition: transform .22s ease, box-shadow .22s ease; }
+.novel-card:hover { transform: translateY(-7px); box-shadow: 0 25px 58px rgba(89,61,40,.18); }
+.novel-card:focus-visible { outline: 4px solid var(--latte); outline-offset: 5px; }
+.cover { display: block; overflow: hidden; aspect-ratio: 2 / 3; background: #eadfd2; }
+.cover img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .35s ease; }
+.novel-card:hover .cover img { transform: scale(1.025); }
+.novel-copy { display: grid; gap: 7px; padding: 22px; }
+.novel-copy .genre { color: var(--latte); font-size: .7rem; font-weight: 900; letter-spacing: .1em; }
+.novel-copy strong { font-family: Georgia, "Noto Serif TC", serif; font-size: clamp(1.35rem, 2.6vw, 1.8rem); line-height: 1.35; }
+.novel-copy > span:last-child { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; color: var(--muted); font-size: .82rem; font-weight: 800; }
+.novel-copy b { display: grid; width: 35px; height: 35px; border-radius: 50%; color: white; background: var(--latte); place-items: center; }
+.shelf-note { margin: 45px 0 75px; color: var(--muted); text-align: center; font-family: Georgia, "Noto Serif TC", serif; }
+footer { padding: 28px 20px; border-top: 1px solid var(--line); color: var(--muted); text-align: center; font-size: .72rem; }
+
+@media (max-width: 820px) {
+  .novel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .site-header, main { width: min(100% - 28px, 620px); }
+  .site-header { min-height: 70px; }
+  .brand img { width: 42px; height: 42px; }
+  .brand small { display: none; }
+  .home-link { padding: 7px 12px; }
+  .hero { padding: 58px 0 38px; }
+  .hero br { display: none; }
+  .novel-grid { grid-template-columns: 1fr; gap: 20px; }
+  .novel-card { width: min(100%, 390px); margin-inline: auto; border-radius: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: .01ms !important; }
+}
