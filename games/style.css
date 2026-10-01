@@ -13,8 +13,9 @@ body { min-height: 100%; margin: 0; overflow-x: hidden; color: var(--ink); backg
 a { color: inherit; }
 
 .site-header { display: flex; align-items: center; justify-content: space-between; width: min(1120px, calc(100% - 40px)); min-height: 82px; margin: auto; border-bottom: 1px solid var(--line); }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-.brand img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+.brand { display: flex; align-items: center; text-decoration: none; }
+.brand picture { display: block; line-height: 0; }
+.brand img { display: block; width: 250px; height: auto; object-fit: contain; }
 .brand span { display: grid; }.brand strong { font-family: Georgia, "Noto Serif TC", serif; }.brand small { margin-top: 2px; color: var(--muted); font-size: .66rem; letter-spacing: .08em; }
 .home-link { padding: 8px 15px; border: 1px solid var(--line); border-radius: 999px; background: rgba(255,255,255,.5); text-decoration: none; font-size: .8rem; font-weight: 800; transition: .2s ease; }
 .home-link:hover, .home-link:focus-visible { border-color: var(--latte); background: white; }
@@ -52,7 +53,7 @@ footer { padding: 28px 20px; border-top: 1px solid var(--line); color: var(--mut
 
 @media (max-width: 720px) {
   .site-header, main { width: min(100% - 28px, 620px); }
-  .site-header { min-height: 70px; }.brand img { width: 42px; height: 42px; }.brand small { display: none; }.home-link { padding: 7px 12px; }
+  .site-header { min-height: 70px; }.brand img { width: 46px; height: 46px; }.brand small { display: none; }.home-link { padding: 7px 12px; }
   .hero { padding: 65px 0 42px; }.game-grid { grid-template-columns: 1fr; gap: 20px; }.game-card { min-height: 480px; padding: 20px; border-radius: 24px; }.game-art { min-height: 205px; }
   .room-note { margin: 38px 0 60px; }
 }
