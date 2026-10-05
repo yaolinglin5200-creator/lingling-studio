@@ -34,3 +34,33 @@ if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-mot
 } else {
   animatedElements.forEach((element) => element.classList.add('visible'));
 }
+
+const characterCarousel = document.querySelector('[data-character-carousel]');
+
+if (characterCarousel) {
+  const slides = [...characterCarousel.querySelectorAll('[data-showcase-slide]')];
+  const dots = [...characterCarousel.querySelectorAll('[data-showcase-dot]')];
+  const previousButton = characterCarousel.querySelector('[data-showcase-prev]');
+  const nextButton = characterCarousel.querySelector('[data-showcase-next]');
+  let activeIndex = 0;
+
+  const showSlide = (index) => {
+    activeIndex = (index + slides.length) % slides.length;
+    slides.forEach((slide, slideIndex) => {
+      slide.hidden = slideIndex !== activeIndex;
+    });
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === activeIndex;
+      dot.classList.toggle('active', isActive);
+      dot.setAttribute('aria-current', isActive ? 'true' : 'false');
+    });
+  };
+
+  previousButton.addEventListener('click', () => showSlide(activeIndex - 1));
+  nextButton.addEventListener('click', () => showSlide(activeIndex + 1));
+  dots.forEach((dot) => dot.addEventListener('click', () => showSlide(Number(dot.dataset.showcaseDot))));
+  characterCarousel.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') showSlide(activeIndex - 1);
+    if (event.key === 'ArrowRight') showSlide(activeIndex + 1);
+  });
+}

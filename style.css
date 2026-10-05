@@ -36,6 +36,7 @@ button { font: inherit; }
 .brand { display: flex; align-items: center; text-decoration: none; line-height: 1.25; }
 .brand picture { display: block; line-height: 0; }
 .brand-mark { display: block; width: clamp(205px, 20vw, 270px); height: auto; object-fit: contain; }
+.brand-mobile-name { display: none; color: var(--cocoa); font-family: Georgia, "Noto Serif TC", serif; font-size: 1rem; font-weight: 700; letter-spacing: .08em; white-space: nowrap; }
 .brand strong, .brand small { display: block; }
 .brand strong { font-size: 1rem; letter-spacing: .05em; }
 .brand small { margin-top: 3px; color: var(--muted); font-family: Georgia, serif; font-size: .7rem; letter-spacing: .08em; }
@@ -83,8 +84,9 @@ h1 { max-width: 680px; font-size: clamp(2.7rem, 5vw, 4.5rem); }
 .work-card:hover .work-cta, .work-card:focus-visible .work-cta { background: var(--latte-dark); color: white; }
 
 .characters-section { background: #f2eadf; }
-.yaoling-feature { position: relative; margin: 0 0 32px; overflow: hidden; border: 1px solid rgba(231,217,202,.9); border-radius: 26px; background: var(--paper); box-shadow: var(--shadow); }
-.yaoling-feature img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.character-showcase { position: relative; margin: 0 0 32px; }
+.yaoling-feature { position: relative; margin: 0; overflow: hidden; border: 1px solid rgba(231,217,202,.9); border-radius: 26px; background: var(--paper); box-shadow: var(--shadow); }
+.yaoling-feature img { display: block; width: 100%; height: auto; object-fit: contain; }
 .yaoling-feature figcaption { display: flex; padding: 18px 24px 20px; align-items: baseline; gap: 16px; }
 .yaoling-feature-kicker { flex: 0 0 auto; color: var(--latte-dark); font-size: .7rem; font-weight: 800; letter-spacing: .18em; }
 .yaoling-feature strong { flex: 0 0 auto; font-family: Georgia, "Noto Serif TC", serif; font-size: 1.25rem; }
@@ -93,6 +95,16 @@ h1 { max-width: 680px; font-size: clamp(2.7rem, 5vw, 4.5rem); }
 .demon-feature figcaption { color: #fff5e9; }
 .demon-feature .yaoling-feature-kicker { color: #e65d4f; }
 .demon-feature figcaption > span:last-child { color: #d9c5b8; }
+.ruoheng-feature { background: #fff8f0; border-color: rgba(203,158,124,.5); }
+.ruoheng-feature .yaoling-feature-kicker { color: #a46f52; }
+.showcase-slide[hidden] { display: none; }
+.showcase-arrow { position: absolute; z-index: 2; top: calc(50% - 28px); display: grid; width: 46px; height: 56px; padding: 0; place-items: center; border: 1px solid rgba(255,255,255,.72); border-radius: 999px; background: rgba(48,34,27,.68); color: #fff; box-shadow: 0 8px 22px rgba(31,19,13,.18); font: 400 2rem/1 Georgia, serif; cursor: pointer; backdrop-filter: blur(5px); }
+.showcase-arrow:hover, .showcase-arrow:focus-visible { background: rgba(48,34,27,.88); }
+.showcase-arrow:focus-visible, .showcase-dot:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.showcase-arrow--prev { left: 16px; }.showcase-arrow--next { right: 16px; }
+.showcase-dots { position: absolute; z-index: 2; right: 0; bottom: -22px; left: 0; display: flex; justify-content: center; gap: 9px; }
+.showcase-dot { width: 10px; height: 10px; padding: 0; border: 0; border-radius: 50%; background: #c7b4a5; cursor: pointer; transition: width .2s ease, background .2s ease; }
+.showcase-dot.active { width: 28px; border-radius: 999px; background: var(--latte-dark); }
 .character-grid { grid-template-columns: repeat(4, 1fr); }
 .character-card { padding: 14px 14px 26px; border-radius: var(--radius); text-align: center; }
 .character-image { aspect-ratio: 3 / 4; margin-bottom: 22px; border-radius: 18px; overflow: hidden; background: var(--cream-deep); }
@@ -150,17 +162,21 @@ blockquote { margin: 28px 0 0; padding-left: 20px; border-left: 2px solid var(--
 
 @media (max-width: 720px) {
   .container { width: min(100% - 30px, 600px); }
-  .header-inner { min-height: 68px; }.brand small { display: none; }
+  .header-inner { min-height: 68px; }.brand { gap: 10px; }.brand small { display: none; }
   .brand-mark { width: 48px; height: 48px; }
+  .brand-mobile-name { display: block; }
   .nav-toggle { display: block; }
   .site-nav { position: absolute; top: calc(100% + 1px); right: 0; left: 0; display: grid; gap: 0; padding: 8px 20px 18px; background: rgba(248,244,237,.98); border-bottom: 1px solid var(--line); box-shadow: 0 15px 25px rgba(79,64,54,.07); opacity: 0; visibility: hidden; transform: translateY(-8px); transition: .2s ease; }
   .site-nav.open { opacity: 1; visibility: visible; transform: none; }.site-nav a { padding: 11px 10px; font-size: .95rem; }.site-nav a::after { display: none; }
   .nav-toggle[aria-expanded="true"] span:nth-of-type(2) { transform: translateY(7px) rotate(45deg); }.nav-toggle[aria-expanded="true"] span:nth-of-type(3) { opacity: 0; }.nav-toggle[aria-expanded="true"] span:nth-of-type(4) { transform: translateY(-7px) rotate(-45deg); }
   .hero { padding-top: 60px; }.hero-inner { min-height: auto; grid-template-columns: 1fr; gap: 40px; }.hero-copy { text-align: center; }.hero-description br { display: none; }.hero-actions { justify-content: center; }.hero-art { width: min(100%, 560px); margin: 0 auto; }.motto { margin-top: 10px; }
   .section { padding: 78px 0; }.section-heading { margin-bottom: 34px; }
-  .yaoling-feature { margin-bottom: 24px; border-radius: 20px; }
+  .character-showcase { margin-bottom: 42px; }
+  .yaoling-feature { border-radius: 20px; }
   .yaoling-feature figcaption { padding: 16px 18px 18px; align-items: flex-start; flex-direction: column; gap: 5px; }
   .yaoling-feature figcaption > span:last-child { margin-top: 3px; }
+  .showcase-arrow { top: 82px; width: 38px; height: 46px; font-size: 1.6rem; }
+  .showcase-arrow--prev { left: 8px; }.showcase-arrow--next { right: 8px; }
   .works-grid { grid-template-columns: 1fr; }.work-card { min-height: auto; }
   .about-inner { grid-template-columns: 1fr; gap: 42px; }.about-decoration { width: min(100%, 390px); margin: auto; }.about-copy { text-align: center; }.about-copy blockquote { display: inline-block; text-align: left; }
   .footer-inner { align-items: flex-start; flex-direction: column; gap: 20px; }
