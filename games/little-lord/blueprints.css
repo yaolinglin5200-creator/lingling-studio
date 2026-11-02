@@ -1,0 +1,7 @@
+.blueprint-practice{margin:20px 0;padding:16px;border:1px solid #c4d8c8;border-radius:16px;background:#f1f5e9}
+.blueprint-practice>summary{cursor:pointer;font-weight:700;font-size:17px;min-height:44px;align-content:center}
+.blueprint-practice>p{font-size:14px;line-height:1.8;color:#526d5e}
+.blueprint-practice .work-layout{margin-bottom:0}
+.blueprint-practice button{min-height:48px}
+.blueprint-practice .work-feedback{margin:16px 0;overflow-wrap:anywhere}
+.blueprint-practice input{min-width:0;width:100%;font-size:18px}

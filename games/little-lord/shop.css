@@ -1,0 +1,11 @@
+.shop-card{margin-top:18px;background:#f6f0df;border:1px solid #dacaa7;border-radius:18px;padding:18px;color:#3b4f40}
+.shop-card>summary{font-weight:700;font-size:18px;min-height:48px;align-content:center;cursor:pointer}
+.shop-card p{font-size:14px;line-height:1.8}.shop-card h3{font-size:20px}.shop-card h4{margin:0;font-size:17px}
+.shop-item{padding:14px 0;border-bottom:1px solid #d9cfb7}.shop-item p{margin:6px 0}
+.shop-controls{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.shop-controls button{min-width:48px;min-height:48px;border-radius:12px;border:1px solid #aebc9c;background:#fffdf6;color:#355c46;font-size:23px}
+.shop-controls output{font-size:16px}.shop-card label{display:block;font-size:16px;margin-top:18px}
+.shop-card input{width:100%;min-height:50px;font-size:18px;margin:10px 0;box-sizing:border-box}
+.shop-card .primary,.shop-card .secondary{width:100%;min-height:48px;margin-top:10px}
+.shop-card .work-hint{line-height:1.9}.shop-card small{display:block;line-height:1.8;margin-top:14px}
+.supplies-card{background:#edf0e6;border-color:#c7cbb8}.supplies-roster{padding:12px;background:#fffdf5;border-radius:12px;font-weight:700}.supplies-crate{border:1px solid #bdc6a5;border-radius:10px;background:#f8f5e6;padding:12px;font-size:16px!important}.supplies-card .work-hint{overflow-wrap:anywhere}

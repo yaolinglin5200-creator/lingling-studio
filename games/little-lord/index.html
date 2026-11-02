@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#203f37"><title>小領主的冒險｜靈靈創作工作室</title><link rel="icon" href="assets/emblem.png"><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="delivery.css"><link rel="stylesheet" href="blueprints.css"><link rel="stylesheet" href="shop.css"></head>
+<body>
+<main id="welcome" class="welcome">
+  <div class="welcome-art" aria-hidden="true"></div>
+  <div class="welcome-shade"></div>
+  <section class="welcome-card">
+    <p class="eyebrow">LINGLING CREATIVE STUDIO · 自由編隊 V0.7</p>
+    <span class="chapter">公開試玩版 · 開發中 · 第一章・我們的村莊</span>
+    <h1>小領主的<br><em>冒險</em></h1>
+    <p class="intro">一座等你照顧的村莊，<br>三位準備陪你出發的夥伴。</p>
+    <form id="name-form">
+      <fieldset class="grade-picker" aria-describedby="grade-help">
+        <legend>選擇你的冒險年級</legend>
+        <div class="grade-options">
+          <label class="grade-option unavailable"><input type="radio" name="grade" value="1" disabled><strong>小一</strong><span>建構中</span></label>
+          <label class="grade-option unavailable"><input type="radio" name="grade" value="2" disabled><strong>小二</strong><span>建構中</span></label>
+          <label class="grade-option unavailable"><input type="radio" name="grade" value="3" disabled><strong>小三</strong><span>建構中</span></label>
+          <label class="grade-option unavailable"><input type="radio" name="grade" value="4" disabled><strong>小四</strong><span>建構中</span></label>
+          <label class="grade-option available"><input type="radio" name="grade" value="5" checked><strong>小五</strong><span>目前開放 ✓</span></label>
+          <label class="grade-option unavailable"><input type="radio" name="grade" value="6" disabled><strong>小六</strong><span>建構中</span></label>
+        </div>
+        <small id="grade-help">小五開放村莊探索、建造任務與送貨小遊戲。</small>
+      </fieldset>
+      <label for="player-name">大家要怎麼稱呼你？</label>
+      <input id="player-name" name="name" placeholder="替小領主取個名字" maxlength="12" autocomplete="off" required aria-describedby="name-help">
+      <small id="name-help">1～12 個字，可以用暱稱，不必填真名。</small>
+      <button class="primary start" type="submit" id="start-button">出發，去看看村莊 <span>→</span></button>
+    </form>
+    <p class="local-note" id="local-note">名字與部分進度只保存在這個瀏覽器，換裝置不會同步。請用暱稱，勿填個資；本遊戲無帳號、廣告或遊戲追蹤程式，網站託管商仍可能保留一般連線紀錄。此為開發中試玩，非正式教材或學習能力評量。</p>
+  </section>
+  <div class="welcome-friends" aria-hidden="true"><div class="sprite large" style="--actor:1"></div><div class="sprite large" style="--actor:2"></div><div class="sprite large" style="--actor:3"></div></div>
+</main>
+<main id="game" hidden>
+  <header class="topbar"><a class="wordmark" href="#" id="home-link"><img class="brand-icon" src="assets/emblem.png" width="40" height="40" alt="靈靈創作工作室"><span>小領主的冒險<small>LINGLING CREATIVE STUDIO</small></span></a><div class="player-chip"><span class="avatar">♛</span><span><small>我們的小領主</small><strong id="name-label"></strong></span><button id="rename" class="text-button">改名</button></div></header>
+  <div class="game-layout">
+    <aside class="journal">
+      <p class="eyebrow">CHAPTER 01 · 出發的地方</p><h1>我們的村莊<span>每段冒險，都從認識彼此開始。</span></h1>
+      <section class="quest"><span class="section-label">目前任務</span><h2 id="quest-title">幫村民蓋好房子</h2><p id="quest-description">到若衡的工地看圖紙，準備木板，親手鋪好地板。</p><button id="build-launch" class="primary">去工地幫忙 →</button><div class="progress-track"><i id="progress-bar"></i></div><p id="progress-text" class="progress-text">認識夥伴 0 / 3</p><div id="friend-list" class="friend-list"></div></section>
+      <section class="play-card"><span class="section-label">休息一下 · 小遊戲</span><h2>曜靈送貨車</h2><p>開車收貨、繞過路障，陪曜靈跑一趟山丘驛站。約兩分半，不用答題。</p><button id="delivery-launch" class="primary">來跑一趟送貨車 →</button><small id="delivery-village-record">隨時能玩，不必先完成建造任務。</small></section>
+      <details class="shop-card"><summary>曜靈的小商店｜幫村莊採買</summary><p id="shop-step"></p><h3 id="shop-title"></h3><p>這次帶了 <strong id="shop-budget"></strong> 枚遊戲金幣。依清單把物品放入籃中，算算最後剩幾枚。</p><div id="shop-items"></div><form id="shop-form" novalidate><label for="shop-change">採買後，應該剩幾枚金幣？</label><input id="shop-change" type="number" min="0" max="999" step="1" inputmode="numeric" placeholder="輸入剩下的金幣"><button id="shop-check" class="primary" type="submit">核對清單，送出採買 →</button></form><button id="shop-help" class="secondary" type="button">請曜靈一起算（可隨時看）</button><p id="shop-hint" class="work-hint" hidden></p><p id="shop-feedback" class="work-feedback" role="status" aria-live="polite">先看看清單，決定每種物品要拿幾份。</p><button id="shop-next" class="secondary" type="button" hidden>接下一張採買清單 →</button><small>自由練習，不扣原有資源。僅保留目前分頁的採買狀態，重新整理會從第一張開始。</small></details>
+      <details class="shop-card supplies-card"><summary>大魔王的補給站｜出發前裝好糧食</summary><p id="supplies-step"></p><h3 id="supplies-title"></h3><p>隊伍準備外出幫忙，不進行戰鬥。先替每一天準備足夠的糧食。</p><p id="supplies-roster" class="supplies-roster"></p><p>劍兵每人每天吃 <strong>4 份</strong>；弓兵每人每天吃 <strong>2 份</strong>。每個人每天都要吃，外出全程人數不變。</p><form id="supplies-form" novalidate><label for="supplies-daily">① 全隊一天需要幾份糧食？</label><input id="supplies-daily" type="number" inputmode="numeric" min="0" max="9999" step="1" placeholder="每天的份數"><label for="supplies-total">② 外出全程需要幾份糧食？</label><input id="supplies-total" type="number" inputmode="numeric" min="0" max="9999" step="1" placeholder="全程的份數"><button id="supplies-check" class="primary" type="submit">核對糧食，分日裝箱 →</button></form><button id="supplies-help" class="secondary" type="button">請大魔王一起算（隨時可看）</button><p id="supplies-hint" class="work-hint" hidden></p><p id="supplies-feedback" class="work-feedback" role="status" aria-live="polite">先算一天吃多少，再準備整趟的糧食。</p><div id="supplies-crates" aria-live="polite"></div><button id="supplies-next" class="secondary" type="button" hidden>準備下一趟補給 →</button><small>自由練習，不扣材料、不消耗角色。只保留目前分頁狀態，重新整理會從第一趟開始。</small></details>
+      <details class="shop-card supplies-card"><summary>補給進階｜自己安排護送隊</summary><h3 id="squad-title"></h3><p id="squad-rule" class="supplies-roster"></p><p>劍兵每人每天吃4份，弓兵每人每天吃2份。決定各帶幾人，算算糧食夠不夠；合理的隊伍不只一種。</p><form id="squad-form" novalidate><label for="squad-swords">劍兵人數</label><input id="squad-swords" type="number" inputmode="numeric" min="0" max="12" step="1" placeholder="你想帶幾位劍兵？"><label for="squad-bows">弓兵人數</label><input id="squad-bows" type="number" inputmode="numeric" min="0" max="12" step="1" placeholder="你想帶幾位弓兵？"><label for="squad-total">這隊全程需要幾份糧食？</label><input id="squad-total" type="number" inputmode="numeric" min="0" max="9999" step="1" placeholder="先算算全程份數"><button class="primary" type="submit">核對隊伍與糧食 →</button></form><button id="squad-help" class="secondary" type="button">大魔王，陪我算這一隊</button><p id="squad-hint" class="work-hint" hidden></p><p id="squad-result" class="work-feedback" role="status" aria-live="polite">先決定人數，再核對全程糧食。可以回到上面的固定補給任務暖身。</p><button id="squad-next" class="secondary" type="button" hidden>試下一個護送計畫 →</button><small>純規劃練習，未加入戰鬥或永久兵隊。不扣資源；重新整理會從第一個計畫開始。</small></details>
+      <section class="places"><div class="section-heading"><h2>想去哪裡？</h2><span>點一下就出發</span></div><div id="destination-list"></div></section>
+      <div class="journal-foot"><span class="save-dot"></span><span id="save-label">探索進度會自動保存</span><button id="reset" class="text-button">重新探索</button></div>
+    </aside>
+    <section class="world-panel" aria-label="村莊探索地圖">
+      <div class="world-top"><div><span class="live-dot"></span> 晴朗的一天 <small>先到處逛逛，時間不會催你。</small></div><div class="audio-controls"><button id="music-toggle" aria-label="播放背景音樂" aria-pressed="false" title="螢火小徑｜靈靈創作工作室">♫ 音樂</button><input type="range" id="music-volume" min="0" max="100" value="22" aria-label="背景音樂音量"><button id="help" class="round-button" aria-label="操作說明">？</button></div></div>
+      <div id="viewport" class="viewport" tabindex="0" aria-label="可拖曳的村莊地圖，點角色或地標前往；方向鍵移動">
+        <div id="world" class="world"><img class="map-art" src="assets/village.png" alt="包含商店、工地、軍營、補給站與村民會館的斜角村莊地圖" draggable="false"><div id="map-locations"></div><div id="map-actors"></div><div id="destination-marker" class="destination-marker" hidden></div><div id="player" class="actor player"><span class="player-tag" id="map-player-name"></span><div class="sprite" style="--actor:0"></div><span class="shadow"></span></div></div>
+        <div id="loading" class="loading">正在打開村莊地圖…</div>
+      </div>
+      <div class="map-controls"><div class="map-hint"><span>✧</span><span id="map-hint">點角色打招呼 · 拖曳看地圖</span></div><div class="control-buttons"><button id="zoom-out" aria-label="縮小地圖">−</button><output id="zoom-label">100%</output><button id="zoom-in" aria-label="放大地圖">＋</button><button id="center" class="center-button">◎ 找到我</button></div></div>
+      <div id="arrival-note" class="arrival-note" role="status" aria-live="polite"></div>
+    </section>
+  </div>
+  <dialog id="conversation" class="conversation"><form method="dialog"><button class="dialog-close" aria-label="關閉對話">×</button></form><div class="dialog-character"><div id="dialog-sprite" class="sprite"></div></div><div class="dialog-copy"><p class="eyebrow" id="dialog-role"></p><h2 id="dialog-name"></h2><p id="dialog-text"></p><button id="dialog-next" class="primary"></button></div></dialog>
+  <dialog id="info-dialog" class="info-dialog"><h2>在村莊裡，慢慢來就好。</h2><p>點地圖上的人物或地標，小領主就會沿著路線走過去。也可以用左側地點清單，或方向鍵／WASD 探索。</p><p>拖曳地圖看遠處，按 ＋／− 縮放；「找到我」會回到小領主的位置。</p><p>按「去工地幫忙」，和若衡一起看圖紙、配木板、鋪地板。想休息時可以玩「曜靈送貨車」，不必先完成任務。商店買賣、編隊與戰鬥將在後續加入。</p><form method="dialog"><button class="primary">知道了，繼續冒險</button></form></dialog>
+  <dialog id="workshop" class="workshop" aria-labelledby="work-title">
+    <header class="work-header"><div><span class="eyebrow">若衡的工地 · <span id="work-step">施工 1 / 2</span></span><h2 id="work-title"></h2></div><button id="work-close" class="work-close" aria-label="先離開工地">×</button></header>
+    <p id="work-subtitle" class="work-story"></p><div class="wood-stock">材料庫 <strong id="work-wood">48</strong> 片木板 <span>每片能鋪 1 平方公尺</span></div>
+    <section id="work-task"><div class="work-layout"><div class="blueprint"><span class="blueprint-label">村莊施工圖紙</span><svg id="floor-plan" viewBox="0 0 440 240" aria-label="可操作的地板圖紙"></svg><p id="floor-count"></p><button id="rearrange" class="secondary" hidden>整理圖紙，看底和高</button></div><div class="work-actions"><form id="plan-form" novalidate><label for="wood-count">你打算搬幾片木板？</label><div class="number-row"><input id="wood-count" type="number" inputmode="numeric" min="1" max="48" step="1" placeholder="輸入片數"><span>片</span></div><button class="primary" type="submit">搬木板，開始鋪！</button></form><div id="lay-controls" hidden><p>點圖紙的空格，或用下面的按鈕鋪木板。</p><div class="lay-buttons"><button id="lay-one" class="primary">鋪一片</button><button id="lay-row" class="primary">鋪一排</button></div><button id="finish-build" class="primary finish" hidden>完工！</button><button id="replan" class="secondary">重新配料（木板會放回去）</button></div><button id="hint-button" class="hint-button">請若衡幫忙（0 / 3）</button><p id="work-hint" class="work-hint" hidden></p></div></div></section>
+    <section id="work-complete" hidden><div class="house-celebration" aria-hidden="true">⌂ <span>⌂</span></div><h3>今天，真的幫上村莊的忙了。</h3><p id="house-result"></p><details class="parent-observation"><summary>給陪玩家長的觀察紀錄</summary><ul id="parent-summary"></ul><p>這是本次操作紀錄，可以陪孩子再看看卡住的地方。</p></details><button id="work-done" class="primary">回村莊看看 →</button></section>
+    <p id="work-feedback" class="work-feedback" role="status" aria-live="polite"></p>
+    <details class="blueprint-practice"><summary>若衡的新圖紙｜想多試一張嗎？</summary><p>自由練習，不花材料、不影響原本施工進度，也不必全部完成。重新整理後從第一張開始。</p><div class="work-layout"><div class="blueprint"><p id="practice-caption"></p><svg id="practice-plan" viewBox="0 0 460 240" role="img"></svg><p>每格 1 平方公尺 · 每片木板能鋪 1 平方公尺</p><button id="practice-straight" class="secondary" type="button" hidden>整理圖紙，看底和高</button></div><div class="work-actions"><form id="practice-form" novalidate><label for="practice-count">這張圖紙，需要幾片木板？</label><div class="number-row"><input id="practice-count" type="number" min="1" max="99" step="1" inputmode="numeric" placeholder="輸入片數"><span>片</span></div><button type="submit" class="primary">和若衡核對看看</button></form><p id="practice-feedback" class="work-feedback" role="status" aria-live="polite">看看每排幾格、有幾排，慢慢來就好。</p><button id="practice-next" class="secondary" type="button" hidden>換下一張圖紙 →</button></div></div></details>
+    <small id="work-saved"></small>
+  </dialog>
+  <dialog id="delivery" class="delivery-dialog" aria-labelledby="delivery-title">
+    <header class="delivery-header"><div><p class="eyebrow">YAOLING'S DELIVERY · 村莊小旅行</p><h2 id="delivery-title">曜靈送貨車</h2></div><div><button id="delivery-pause" disabled>暫停</button><button id="delivery-exit">回村莊</button></div></header>
+    <div class="delivery-layout"><div class="delivery-driving"><div class="delivery-hud"><span id="delivery-route-text">村莊 → 山丘驛站</span><span>貨物 <strong id="delivery-parcels">0</strong> 箱</span><span id="delivery-progress-label">路程 0%</span></div><div class="delivery-road-progress"><progress id="delivery-progress" max="100" value="0" aria-label="送貨路程"></progress></div>
+      <div id="delivery-stage" class="delivery-stage" tabindex="0" aria-label="送貨道路，使用左右方向鍵或下方按鈕換道，P暫停"><canvas id="delivery-canvas" width="400" height="600" role="img" aria-label="三線道路，綠色送貨車收集木箱並避開橘色路障">送貨小遊戲需要支援 Canvas 的瀏覽器。</canvas><div id="delivery-overlay" class="delivery-overlay"><div class="delivery-overlay-card"><h3 id="delivery-overlay-title">一起送貨去！</h3><p id="delivery-overlay-text"></p><p id="delivery-bumps" class="tiny" hidden></p><button id="delivery-start" class="primary">準備好了，出發！</button></div></div></div>
+      <div class="drive-buttons"><button id="delivery-left" disabled aria-label="送貨車向左換道">← 向左</button><button id="delivery-right" disabled aria-label="送貨車向右換道">向右 →</button></div><p class="drive-hint">手機：點左右按鈕，或在道路上左右滑動<br>電腦：← →／A D 換道，P 暫停</p><span id="delivery-lane-label" class="delivery-a11y">中間車道</span><span id="delivery-announcement" class="delivery-a11y" aria-live="polite"></span>
+    </div><aside class="delivery-notes"><section class="delivery-companion"><div class="sprite" style="--actor:2" aria-hidden="true"></div><span class="section-label">冒險夥伴 · 曜靈</span><h3>出發吧，小領主！</h3><p>村民的物資要送到山丘那邊。幫我開車，把沿路的木箱帶過去吧。</p></section><ul class="delivery-instructions"><li><b>▣ 收集木箱</b>對準車道，就能把貨物收起來。</li><li><b>⚑ 繞過路障</b>碰到只會慢一點，不會損失已收好的貨物。</li><li><b>☀ 慢慢到達就好</b>一趟約兩分半，可隨時暫停。回村莊後，這趟會留在暫停狀態，重新整理才會結束未完成的送貨。</li></ul><p id="delivery-record" class="delivery-record">第一趟送貨，慢慢來就好。</p><small id="delivery-save"></small></aside></div>
+  </dialog>
+</main>
+<audio id="bgm" src="assets/firefly-path.mp3" loop preload="none"></audio>
+<script src="workshop.js" defer></script><script src="blueprints.js" defer></script><script src="shop.js" defer></script><script src="supplies.js" defer></script><script src="squad.js" defer></script><script src="delivery.js" defer></script><script src="game.js" defer></script></body></html>
