@@ -1,0 +1,8 @@
+/* Only the village player consumes the new sheet; NPCs and dialogue stay unchanged. */
+#player.motion-ready .sprite{
+  width:160px;height:160px;clip-path:none;
+  background-image:url('assets/player-walk-v1.png');
+  background-size:400% 400%;
+  background-position:calc(var(--walk-frame,0) * 100% / 3) calc(var(--walk-row,0) * 100% / 3);
+  animation:none;transform:none;
+}

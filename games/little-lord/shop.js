@@ -26,5 +26,6 @@
   function hint(){const o=orders[index],costs=o.items.map(i=>i.price*i.need),sum=costs.reduce((a,b)=>a+b,0);$('shop-hint').textContent=o.items.map((i,n)=>`${i.name}：${i.price} × ${i.need} = ${costs[n]} 枚。`).join(' ')+`合計 ${costs.join(' + ')} = ${sum} 枚；剩下 ${o.budget} − ${sum} = ${o.budget-sum} 枚。`;$('shop-hint').hidden=false;}
   $('shop-help').addEventListener('click',hint);
   $('shop-next').addEventListener('click',()=>{index=(index+1)%orders.length;counts=[0,0];done=false;$('shop-change').value='';$('shop-hint').hidden=true;$('shop-feedback').textContent='曜靈：新的清單來了。先把需要的物品放進採買籃吧。';render();});
+  $('shop-form').addEventListener('submit',()=>{if(done)document.dispatchEvent(new Event('ll:shop-success'));});
   render();
 })(typeof window==='undefined'?globalThis:window);
