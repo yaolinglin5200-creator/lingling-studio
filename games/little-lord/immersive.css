@@ -17,3 +17,11 @@ body.immersive{background:#152d29}.immersive #game{height:100dvh;overflow:hidden
   -webkit-touch-callout:none;
 }
 #viewport img{-webkit-user-drag:none}
+/* Keep camera controls available in the map dialog, not over the play field. */
+.immersive #rpg-map .map-controls{
+  position:static;transform:none;max-width:100%;width:100%;margin:12px 0 0;
+  padding:12px;display:flex;justify-content:center;
+}
+.immersive #rpg-map .control-buttons{flex-wrap:wrap;justify-content:center;margin:0}
+.immersive #rpg-map .control-buttons button{min-width:48px;min-height:48px}
+.immersive #rpg-map .control-buttons output{font-size:14px}
