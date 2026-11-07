@@ -10,3 +10,10 @@ body.immersive{background:#152d29}.immersive #game{height:100dvh;overflow:hidden
   .rpg-quest[open] .quest>p,.rpg-quest[open] #build-launch,.rpg-quest[open] #progress-text{display:block}
   .rpg-quest[open] #build-launch{min-height:44px}
 }
+/* Restrict only the interactive scene, not forms or readable dialog copy. */
+#viewport,#viewport *{
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+}
+#viewport img{-webkit-user-drag:none}

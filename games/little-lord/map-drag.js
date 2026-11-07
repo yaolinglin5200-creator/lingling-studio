@@ -1,6 +1,10 @@
 'use strict';
 // One pointer owns a gesture; only a drag (not a tap) consumes the following click.
 function attachLLMapDrag(viewport, host = window) {
+  // Scene labels are controls, not document text. Keep this scoped to the map.
+  for (const type of ['contextmenu','selectstart','dragstart']) {
+    viewport.addEventListener(type, e => e.preventDefault());
+  }
   let drag = null, suppressUntil = 0;
   const now = () => Date.now();
   const finish = e => {
