@@ -1,0 +1,11 @@
+/* Embedded mode stays inside the village modal; no page-level navigation. */
+body.embedded main { height: 100vh; height: 100dvh; padding: 4px 8px; display: flex; flex-direction: column; gap: 4px; }
+body.embedded header { flex: none; }
+body.embedded header h1,body.embedded .note { display: none; }
+body.embedded #stage { flex: 1; min-height: 0; max-width: none; width: 100%; margin: 0; }
+body.embedded canvas { width: 100%; height: 100%; object-fit: contain; }
+body.embedded .controls { flex: none; }
+body.embedded #notice { margin: 0; min-height: 24px; font-size: 16px; }
+body.embedded #overlay { overflow: auto; }
+body.embedded #overlay h2 { font-size: 20px; }
+body.embedded #overlay p { font-size: 16px; margin: 4px 0; }

@@ -1,0 +1,65 @@
+/* V0.8.8 candidate: isolate native button layout from NPC art.
+   Does not replace/crop the character atlas or affect player-motion.css. */
+.immersive #rpg-flight { width: min(1000px, 98vw); padding: 10px; }
+.immersive #rpg-flight .rpg-panel-header { top: -10px; }
+.rpg-flight-frame { display: block; border: 0; width: 100%; height: 74vh; height: calc(94dvh - 90px); min-height: 180px; }
+.immersive .actor.npc {
+  -webkit-appearance: none;
+  appearance: none;
+  display: block;
+  line-height: 0;
+  overflow: visible;
+}
+.immersive .actor.npc > .sprite {
+  display: block;
+  flex: none;
+}
+.immersive .actor.npc > .name-tag { line-height: 1.4; }
+
+/* Content-sized rather than filling an implicit native-dialog height.
+   Keep the existing breakpoint-specific columns, portrait sizes and scroll. */
+.immersive .conversation {
+  inset: auto 0 max(16px, env(safe-area-inset-bottom));
+  height: max-content;
+  min-height: 0;
+  margin: 0 auto;
+}
+.immersive .conversation[open] {
+  align-content: start;
+  align-items: start;
+  grid-auto-rows: max-content;
+}
+.immersive .conversation .dialog-character {
+  align-self: start;
+  min-height: 0;
+}
+.immersive .conversation .dialog-copy { min-width: 0; }
+
+/* The shop portrait is static: keep its full cell instead of trimming fingers.
+   Do not remove clipping globally from the village/player animation. */
+.immersive .rpg-shop-portrait .sprite {
+  clip-path: none;
+  filter: none;
+  max-width: 100%;
+}
+.immersive #rpg-shop .shop-card p,
+.immersive #rpg-shop .shop-card label,
+.immersive #rpg-shop .shop-controls output,
+.immersive #rpg-shop .shop-card .work-hint {
+  font-size: 18px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+.immersive #rpg-shop .shop-card h3 { font-size: 23px; line-height: 1.5; }
+.immersive #rpg-shop .shop-card h4 { font-size: 20px; line-height: 1.5; }
+.immersive #rpg-shop .shop-card small { font-size: 16px; line-height: 1.8; }
+.immersive #rpg-shop .shop-card input { font-size: 20px; min-height: 52px; }
+.immersive #rpg-shop .shop-card .primary,
+.immersive #rpg-shop .shop-card .secondary { font-size: 18px; line-height: 1.5; }
+.immersive #rpg-shop .shop-controls { flex-wrap: wrap; gap: 8px; }
+.immersive #rpg-shop .shop-controls output { flex: 1; min-width: 0; text-align: center; }
+.immersive #rpg-shop .shop-controls button { flex: 0 0 48px; min-height: 48px; }
+.immersive #rpg-shop .shop-card { min-width: 0; }
+@media (max-width: 760px) {
+  .immersive #rpg-shop #shop-items { grid-template-columns: minmax(0, 1fr); }
+}
