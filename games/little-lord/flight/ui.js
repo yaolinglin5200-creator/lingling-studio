@@ -35,6 +35,7 @@
   function start(){const s=run.snapshot();if(s.mode==='paused')run.resume();else{if(s.mode==='finished')run.reset();run.start();}clear();last=0;lastNotice=-10;$('notice').textContent='';overlay();if(!frame)frame=requestAnimationFrame(loop);canvas.focus();}
   $('start').addEventListener('click',start);$('pause').addEventListener('click',()=>run.snapshot().mode==='paused'?start():pause());
   document.querySelectorAll('[data-key]').forEach(b=>{
+    for(const type of ['contextmenu','selectstart'])b.addEventListener(type,e=>e.preventDefault());
     b.addEventListener('pointerdown',e=>{if(run.snapshot().mode!=='playing'||!e.isPrimary&&e.pointerType==='mouse')return;e.preventDefault();pointers.set(e.pointerId,b.dataset.key);b.setPointerCapture(e.pointerId);});
     for(const type of ['pointerup','pointercancel','lostpointercapture'])b.addEventListener(type,e=>pointers.delete(e.pointerId));
   });

@@ -13,7 +13,7 @@
   map.append(make('h3','','地圖視角'),make('p','','調整縮放後按「回村莊」查看；「找到我」會直接回到小領主的位置。'),viewControls);
   $('center').addEventListener('click',()=>map.close());
   map.addEventListener('click',e=>{if(e.target.closest('.place-button'))map.close();});
-  const menu=panel('rpg-settings','冒險選單');menu.append(document.querySelector('.journal-foot'));const note=make('p','','V0.9.0 公開試玩／開發中：點地標或角色前往，方向鍵／WASD或左下方向鈕沿道路移動。點右下「互動」會前往最近的地點。名字與部分進度只保存在目前瀏覽器。');menu.append(note);
+  const menu=panel('rpg-settings','冒險選單');menu.append(document.querySelector('.journal-foot'));const note=make('p','','V0.9.1 公開試玩／開發中：點地標或角色前往，方向鍵／WASD或左下方向鈕沿道路移動。點右下「互動」會前往最近的地點。名字與部分進度只保存在目前瀏覽器。');menu.append(note);
   const shop=panel('rpg-shop','曜靈的小商店');const shopLayout=make('div','rpg-shop-layout'),portrait=make('aside','rpg-shop-portrait');portrait.innerHTML='<div class="sprite" style="--actor:2" aria-hidden="true"></div><h3>曜靈</h3><p>歡迎光臨！先照清單把物品放進籃子，再一起核對剩下的金幣。</p>';
   const card=document.querySelector('.shop-card:not(.supplies-card)');card.open=true;card.querySelector('summary').hidden=true;shopLayout.append(portrait,card);shop.append(shopLayout);
   const shopReturn=make('button','primary rpg-shop-return','採買先到這裡，回村莊 →');shopReturn.addEventListener('click',()=>shop.close());shop.append(shopReturn);

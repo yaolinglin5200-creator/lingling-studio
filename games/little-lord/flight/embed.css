@@ -1,4 +1,9 @@
 /* Embedded mode stays inside the village modal; no page-level navigation. */
+.controls button[data-key] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
 body.embedded main { height: 100vh; height: 100dvh; padding: 4px 8px; display: flex; flex-direction: column; gap: 4px; }
 body.embedded header { flex: none; }
 body.embedded header h1,body.embedded .note { display: none; }
