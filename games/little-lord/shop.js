@@ -3,7 +3,10 @@
   const orders=Object.freeze([
     {title:'工地的點心時間',budget:60,items:[{name:'麵包',icon:'🥖',price:8,need:3},{name:'果汁',icon:'🧃',price:6,need:2}]},
     {title:'驛站的補給清單',budget:100,items:[{name:'飯糰',icon:'🍙',price:12,need:4},{name:'水壺',icon:'💧',price:9,need:3}]},
-    {title:'村莊的野餐準備',budget:150,items:[{name:'便當',icon:'🍱',price:18,need:5},{name:'蘋果',icon:'🍎',price:7,need:6}]}
+    {title:'村莊的野餐準備',budget:150,items:[{name:'便當',icon:'🍱',price:18,need:5},{name:'蘋果',icon:'🍎',price:7,need:6}]},
+    {title:'雨天的巡守補給',budget:240,items:[{name:'熱湯',icon:'🥣',price:19,need:7},{name:'饅頭',icon:'🥟',price:11,need:8}]},
+    {title:'村莊慶典的午餐',budget:300,items:[{name:'便當',icon:'🍱',price:24,need:9},{name:'果汁',icon:'🧃',price:12,need:7}]},
+    {title:'河岸清掃隊的點心',budget:220,items:[{name:'飯糰',icon:'🍙',price:17,need:8},{name:'茶飲',icon:'🍵',price:9,need:9}]}
   ].map(o=>Object.freeze({...o,items:Object.freeze(o.items.map(Object.freeze))})));
   function tally(order,counts){if(!Array.isArray(counts)||counts.length!==order.items.length||counts.some(n=>!Number.isSafeInteger(n)||n<0||n>12))return null;const costs=counts.map((n,i)=>n*order.items[i].price),total=costs.reduce((a,b)=>a+b,0);return {costs,total,left:order.budget-total,exact:counts.every((n,i)=>n===order.items[i].need)};}
   function check(order,counts,raw){const bill=tally(order,counts);if(!bill)return 'invalid';if(!bill.exact)return 'quantity';if(bill.left<0)return 'budget';const text=String(raw??'').trim(),n=Number(text);if(!text||!Number.isSafeInteger(n)||n<0||n>999)return 'invalid';return n===bill.left?'correct':'change';}
