@@ -2,7 +2,7 @@
 (() => {
   const $=id=>document.getElementById(id),canvas=$('sky'),ctx=canvas.getContext('2d');
   if(!ctx){$('description').textContent='這個瀏覽器無法顯示飛行畫面。';$('start').disabled=true;return;}
-  const run=LLFlight.create(),keyboard=new Set(),pointers=new Map();let last=0,frame=0,lastHud='',lastNotice=-10;
+  const run=LLFlight.create(),keyboard=new Set(),pointers=new Map();let last=0,frame=0,lastHud='',lastNotice=-10,lastRoute='foothills';
   const aliases={a:'ArrowLeft',A:'ArrowLeft',d:'ArrowRight',D:'ArrowRight',w:'ArrowUp',W:'ArrowUp',s:'ArrowDown',S:'ArrowDown'};
   function clear(){keyboard.clear();pointers.clear();}
   function draw(){const s=run.snapshot();ctx.fillStyle='#c6deda';ctx.fillRect(0,0,800,480);
@@ -10,7 +10,7 @@
     // Original code-drawn clouds, boxes and plane; no borrowed artwork or flashing.
     for(const o of s.objects){ctx.save();ctx.translate(o.x,o.y);if(o.kind==='cloud'){ctx.fillStyle='#f6f5e8';ctx.beginPath();ctx.ellipse(0,0,35,21,0,0,Math.PI*2);ctx.fill();ctx.beginPath();ctx.arc(-8,-12,20,0,Math.PI*2);ctx.fill();ctx.strokeStyle='#7f9690';ctx.lineWidth=2;ctx.stroke();}else{ctx.fillStyle='#b78b50';ctx.fillRect(-17,-17,34,34);ctx.fillStyle='#f7dba0';ctx.fillRect(-3,-17,6,34);ctx.strokeStyle='#735a38';ctx.strokeRect(-17,-17,34,34);}ctx.restore();}
     ctx.save();ctx.translate(s.x,s.y);ctx.fillStyle='#e4c77d';ctx.beginPath();ctx.moveTo(-8,-33);ctx.lineTo(15,-5);ctx.lineTo(-8,33);ctx.lineTo(-16,30);ctx.lineTo(-8,0);ctx.lineTo(-16,-30);ctx.closePath();ctx.fill();ctx.fillStyle='#315f50';ctx.beginPath();ctx.ellipse(0,0,33,11,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#91c1bd';ctx.fillRect(4,-7,12,8);ctx.fillStyle='#e4c77d';ctx.fillRect(-29,-17,7,34);ctx.restore();
-    const key=[s.mode,s.parcels,Math.ceil(s.remaining)].join('|');if(key!==lastHud){$('hud').textContent=`補給箱 ${s.parcels} · 剩餘 ${Math.ceil(s.remaining)} 秒`;lastHud=key;}
+    const key=[s.mode,s.parcels,Math.ceil(s.remaining),s.route.id].join('|');if(key!==lastHud){$('hud').textContent=`補給箱 ${s.parcels} · 剩餘 ${Math.ceil(s.remaining)} 秒`;$('route-label').textContent=s.route.label;$('route-progress').value=Math.round(s.progress*100);$('route-percent').textContent=`${Math.round(s.progress*100)}%`;lastHud=key;}
   }
   function overlay(){const s=run.snapshot();$('overlay').hidden=s.mode==='playing';$('pause').disabled=s.mode==='ready'||s.mode==='finished';$('pause').textContent=s.mode==='paused'?'繼續':'暫停';
     if(s.mode==='paused'){$('title').textContent='先休息，天空也會等你。';$('description').textContent='按繼續就能接著飛，時間與補給都保留。';$('start').textContent='繼續飛行';}
@@ -27,12 +27,13 @@
   }
   function loop(now){frame=0;const keys=new Set([...keyboard,...pointers.values()]),input={x:Number(keys.has('ArrowRight'))-Number(keys.has('ArrowLeft')),y:Number(keys.has('ArrowDown'))-Number(keys.has('ArrowUp'))};
     const events=run.step(last?Math.min((now-last)/1000,.1):0,input);last=now;const s=run.snapshot();
-    if(events.includes('parcel')&&s.seconds-lastNotice>.8){$('notice').textContent='收好一箱補給！';lastNotice=s.seconds;}
+    if(s.route.id!==lastRoute){$('notice').textContent=`進入${s.route.label}，雲流會快一點。`;lastNotice=s.seconds;lastRoute=s.route.id;}
+    else if(events.includes('parcel')&&s.seconds-lastNotice>.8){$('notice').textContent='收好一箱補給！';lastNotice=s.seconds;}
     if(events.includes('bump')){$('notice').textContent='穿過雲團了，慢慢飛就好。';lastNotice=s.seconds;}
     if(s.seconds-lastNotice>2)$('notice').textContent='';draw();
     if(s.mode==='playing')frame=requestAnimationFrame(loop);else{clear();overlay();}
   }
-  function start(){const s=run.snapshot();if(s.mode==='paused')run.resume();else{if(s.mode==='finished')run.reset();run.start();}clear();last=0;lastNotice=-10;$('notice').textContent='';overlay();if(!frame)frame=requestAnimationFrame(loop);canvas.focus();}
+  function start(){const s=run.snapshot();if(s.mode==='paused')run.resume();else{if(s.mode==='finished')run.reset();run.start();}clear();last=0;lastNotice=-10;lastRoute=run.snapshot().route.id;$('notice').textContent='';overlay();draw();if(!frame)frame=requestAnimationFrame(loop);canvas.focus();}
   $('start').addEventListener('click',start);$('pause').addEventListener('click',()=>run.snapshot().mode==='paused'?start():pause());
   document.querySelectorAll('[data-key]').forEach(b=>{
     for(const type of ['contextmenu','selectstart'])b.addEventListener(type,e=>e.preventDefault());

@@ -2,11 +2,16 @@
 (function(root){
   const WIDTH=800,HEIGHT=480,DURATION=120,HZ=120;
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  function routeAt(seconds){
+    if(seconds<40)return {id:'foothills',label:'山腳田野',speed:130};
+    if(seconds<80)return {id:'forest',label:'松林山腰',speed:145};
+    return {id:'summit',label:'雲頂哨站',speed:160};
+  }
   function create(seed=Date.now()){
     let s,randomState,accumulator;
     function reset(){randomState=seed>>>0;accumulator=0;s={mode:'ready',ticks:0,x:150,y:240,parcels:0,bumps:0,grace:0,objects:[],wave:0};return snapshot();}
     function random(){randomState=(Math.imul(1664525,randomState)+1013904223)>>>0;return randomState/4294967296;}
-    function snapshot(){return {...s,seconds:s.ticks/HZ,remaining:Math.max(0,DURATION-s.ticks/HZ),objects:s.objects.map(o=>({...o}))};}
+    function snapshot(){const seconds=s.ticks/HZ;return {...s,seconds,remaining:Math.max(0,DURATION-seconds),progress:clamp(seconds/DURATION,0,1),route:routeAt(seconds),objects:s.objects.map(o=>({...o}))};}
     function start(){if(s.mode==='ready')s.mode='playing';}
     function pause(){if(s.mode==='playing')s.mode='paused';accumulator=0;}
     function resume(){if(s.mode==='paused')s.mode='playing';}
@@ -22,7 +27,8 @@
         s.x=clamp(s.x+dx*220/HZ,40,WIDTH-40);s.y=clamp(s.y+dy*220/HZ,40,HEIGHT-40);
         s.grace=Math.max(0,s.grace-1);
         if(s.ticks%192===0&&s.ticks<(DURATION-8)*HZ)spawn();
-        for(const o of s.objects){o.x-=130/HZ;
+        const speed=routeAt(s.ticks/HZ).speed;
+        for(const o of s.objects){o.x-=speed/HZ;
           if(!o.resolved&&Math.hypot((o.x-s.x)/1.2,o.y-s.y)<30){o.resolved=true;
             if(o.kind==='parcel'){s.parcels++;events.push('parcel');}
             else if(s.grace===0){s.bumps++;s.grace=HZ;events.push('bump');}
@@ -35,6 +41,6 @@
     }
     reset();return {reset,start,pause,resume,step,snapshot};
   }
-  const api={WIDTH,HEIGHT,DURATION,create};
+  const api={WIDTH,HEIGHT,DURATION,routeAt,create};
   if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.LLFlight=api;
 })(typeof window==='undefined'?globalThis:window);
