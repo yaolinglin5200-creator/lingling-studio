@@ -3,7 +3,10 @@
   const missions=Object.freeze([
     {title:'陪曜靈送物資到山丘',swords:3,bows:4,days:2},
     {title:'巡查村外的舊道路',swords:5,bows:2,days:3},
-    {title:'護送工人修復驛站',swords:4,bows:6,days:4}
+    {title:'護送工人修復驛站',swords:4,bows:6,days:4},
+    {title:'替溪邊步道準備補給',swords:2,bows:5,days:3},
+    {title:'陪村民巡修山谷橋梁',swords:6,bows:3,days:2},
+    {title:'收成季守望村莊倉庫',swords:3,bows:7,days:5}
   ].map(Object.freeze));
   function needs(m){if(!m||!['swords','bows','days'].every(k=>Number.isSafeInteger(m[k])&&m[k]>=1&&m[k]<=12))return null;const swords=m.swords*4,bows=m.bows*2;return {swords,bows,daily:swords+bows,total:(swords+bows)*m.days};}
   function check(m,dayRaw,totalRaw){const n=needs(m);if(!n)return 'invalid';const parse=v=>{const s=String(v??'').trim(),n=Number(s);return s&&Number.isSafeInteger(n)&&n>=0&&n<=9999?n:null;};const day=parse(dayRaw),total=parse(totalRaw);if(day===null||total===null)return 'invalid';if(day!==n.daily)return 'daily';if(total!==n.total)return total===n.daily?'days':'total';return 'correct';}
